@@ -1,3 +1,87 @@
-<p>Hi! I'm osako worry.</p>
-<p>This is my personal website.</p>
-<p>Nice to meet you here.</p>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Osako 的个人网站</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <h1>Osako 的个人网站</h1>
+      <p>记录想法、管理资料、展示生活。</p>
+      <nav>
+        <a href="#home">主页</a>
+        <a href="#blog">博客</a>
+        <a href="#profile">个人资料库</a>
+        <a href="#notes">分类笔记</a>
+        <a href="#gallery">照片墙</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section id="home" class="card">
+        <h2>主页</h2>
+        <p>欢迎来到我的个人空间，这里会持续更新我的学习、生活和创作内容。</p>
+      </section>
+
+      <section id="blog" class="card">
+        <h2>博客展示</h2>
+        <div id="blog-list" class="grid"></div>
+      </section>
+
+      <section id="profile" class="card">
+        <h2>个人资料库</h2>
+        <ul class="profile-list">
+          <li><strong>昵称：</strong>Osako</li>
+          <li><strong>定位：</strong>开发爱好者 / 知识记录者</li>
+          <li><strong>兴趣：</strong>编程、阅读、摄影</li>
+          <li><strong>邮箱：</strong>hello@example.com</li>
+        </ul>
+      </section>
+
+      <section id="notes" class="card">
+        <h2>分类并储存笔记</h2>
+        <form id="note-form" class="stack" autocomplete="off">
+          <label>
+            标题
+            <input id="note-title" type="text" placeholder="输入笔记标题" required />
+          </label>
+          <label>
+            分类
+            <select id="note-category">
+              <option value="学习">学习</option>
+              <option value="工作">工作</option>
+              <option value="生活">生活</option>
+              <option value="灵感">灵感</option>
+            </select>
+          </label>
+          <label>
+            内容（支持编辑文档）
+            <textarea id="note-content" rows="8" placeholder="在这里编辑你的文档或笔记" required></textarea>
+          </label>
+          <div class="actions">
+            <button type="submit">保存笔记</button>
+            <label class="import-button" for="import-file">导入文件</label>
+            <input id="import-file" type="file" accept=".txt,.md,.json" />
+          </div>
+        </form>
+        <div id="note-feedback" class="feedback" aria-live="polite"></div>
+        <div id="note-list" class="stack"></div>
+      </section>
+
+      <section id="gallery" class="card">
+        <h2>照片墙</h2>
+        <label class="import-button" for="image-import">导入图片</label>
+        <input id="image-import" type="file" accept="image/*" multiple />
+        <div id="photo-wall" class="photo-wall"></div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#top">回到顶部</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
