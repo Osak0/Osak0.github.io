@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>照片墙 - Osako 的个人网站</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <h1>照片墙</h1>
+      <p>展示并管理你的照片内容。</p>
+      <nav>
+        <a href="index.html">主页</a>
+        <a href="blog.html">博客</a>
+        <a href="profile.html">个人资料库</a>
+        <a href="notes.html">分类笔记</a>
+        <a href="gallery.html">照片墙</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>照片墙</h2>
+        <label class="import-button" for="image-import">导入图片</label>
+        <input id="image-import" type="file" accept="image/*" multiple />
+        <div id="photo-wall" class="photo-wall"></div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#top">回到顶部</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

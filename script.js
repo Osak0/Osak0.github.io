@@ -46,6 +46,9 @@
   }
 
   function renderBlogs() {
+    if (!blogList) {
+      return;
+    }
     blogList.innerHTML = "";
     BLOGS.forEach(function (blog) {
       var item = document.createElement("article");
@@ -58,6 +61,9 @@
   }
 
   function renderNotes() {
+    if (!noteList) {
+      return;
+    }
     noteList.innerHTML = "";
     if (!notes.length) {
       noteList.innerHTML = "<p>还没有笔记，开始写第一条吧。</p>";
@@ -79,6 +85,9 @@
   }
 
   function renderPhotos() {
+    if (!photoWall) {
+      return;
+    }
     photoWall.innerHTML = "";
     if (!photos.length) {
       photoWall.innerHTML = "<p>暂无图片，点击“导入图片”上传到照片墙。</p>";
@@ -103,74 +112,80 @@
       .replace(/'/g, "&#39;");
   }
 
-  noteForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    var title = noteTitle.value.trim();
-    var category = noteCategory.value;
-    var content = noteContent.value.trim();
+  if (noteForm && noteTitle && noteCategory && noteContent && noteFeedback) {
+    noteForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var title = noteTitle.value.trim();
+      var category = noteCategory.value;
+      var content = noteContent.value.trim();
 
-    if (!title || !content) {
-      noteFeedback.textContent = "请完整填写标题和内容。";
-      return;
-    }
+      if (!title || !content) {
+        noteFeedback.textContent = "请完整填写标题和内容。";
+        return;
+      }
 
-    notes.push({
-      title: title,
-      category: category,
-      content: content,
-      createdAt: new Date().toLocaleString()
-    });
-
-    writeStorage(STORAGE_KEYS.notes, notes);
-    renderNotes();
-    noteForm.reset();
-    noteFeedback.textContent = "笔记已保存。";
-  });
-
-  importFileInput.addEventListener("change", function (event) {
-    var file = event.target.files && event.target.files[0];
-    if (!file) {
-      return;
-    }
-
-    var reader = new FileReader();
-    reader.onload = function () {
-      noteContent.value = String(reader.result || "");
-      noteTitle.value = noteTitle.value || file.name.replace(/\.[^.]+$/, "");
-      noteFeedback.textContent = "文件已导入到编辑器，请确认后保存笔记。";
-    };
-    reader.readAsText(file);
-    importFileInput.value = "";
-  });
-
-  imageImportInput.addEventListener("change", function (event) {
-    var files = event.target.files
-      ? Array.prototype.slice.call(event.target.files).filter(function (file) {
-          return file.type.indexOf("image/") === 0;
-        })
-      : [];
-    if (!files.length) {
-      return;
-    }
-
-    var readTasks = files.map(function (file) {
-      return new Promise(function (resolve) {
-        var reader = new FileReader();
-        reader.onload = function () {
-          resolve(String(reader.result || ""));
-        };
-        reader.readAsDataURL(file);
+      notes.push({
+        title: title,
+        category: category,
+        content: content,
+        createdAt: new Date().toLocaleString()
       });
-    });
 
-    Promise.all(readTasks).then(function (images) {
-      photos = photos.concat(images).slice(-MAX_PHOTO_ITEMS);
-      writeStorage(STORAGE_KEYS.photos, photos);
-      renderPhotos();
+      writeStorage(STORAGE_KEYS.notes, notes);
+      renderNotes();
+      noteForm.reset();
+      noteFeedback.textContent = "笔记已保存。";
     });
+  }
 
-    imageImportInput.value = "";
-  });
+  if (importFileInput && noteContent && noteTitle && noteFeedback) {
+    importFileInput.addEventListener("change", function (event) {
+      var file = event.target.files && event.target.files[0];
+      if (!file) {
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function () {
+        noteContent.value = String(reader.result || "");
+        noteTitle.value = noteTitle.value || file.name.replace(/\.[^.]+$/, "");
+        noteFeedback.textContent = "文件已导入到编辑器，请确认后保存笔记。";
+      };
+      reader.readAsText(file);
+      importFileInput.value = "";
+    });
+  }
+
+  if (imageImportInput) {
+    imageImportInput.addEventListener("change", function (event) {
+      var files = event.target.files
+        ? Array.prototype.slice.call(event.target.files).filter(function (file) {
+            return file.type.indexOf("image/") === 0;
+          })
+        : [];
+      if (!files.length) {
+        return;
+      }
+
+      var readTasks = files.map(function (file) {
+        return new Promise(function (resolve) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            resolve(String(reader.result || ""));
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      Promise.all(readTasks).then(function (images) {
+        photos = photos.concat(images).slice(-MAX_PHOTO_ITEMS);
+        writeStorage(STORAGE_KEYS.photos, photos);
+        renderPhotos();
+      });
+
+      imageImportInput.value = "";
+    });
+  }
 
   renderBlogs();
   renderNotes();
