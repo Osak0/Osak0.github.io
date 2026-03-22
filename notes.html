@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分类笔记 - Osako 的个人网站</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <h1>分类笔记</h1>
+      <p>按类别记录并保存你的笔记。</p>
+      <nav>
+        <a href="index.html">主页</a>
+        <a href="blog.html">博客</a>
+        <a href="profile.html">个人资料库</a>
+        <a href="notes.html">分类笔记</a>
+        <a href="gallery.html">照片墙</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>分类并储存笔记</h2>
+        <form id="note-form" class="stack" autocomplete="off">
+          <label>
+            标题
+            <input id="note-title" type="text" placeholder="输入笔记标题" required />
+          </label>
+          <label>
+            分类
+            <select id="note-category">
+              <option value="学习">学习</option>
+              <option value="工作">工作</option>
+              <option value="生活">生活</option>
+              <option value="灵感">灵感</option>
+            </select>
+          </label>
+          <label>
+            内容（支持编辑文档）
+            <textarea id="note-content" rows="8" placeholder="在这里编辑你的文档或笔记" required></textarea>
+          </label>
+          <div class="actions">
+            <button type="submit">保存笔记</button>
+            <label class="import-button" for="import-file">导入文件</label>
+            <input id="import-file" type="file" accept=".txt,.md,.json" />
+          </div>
+        </form>
+        <div id="note-feedback" class="feedback" aria-live="polite"></div>
+        <div id="note-list" class="stack"></div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#top">回到顶部</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
