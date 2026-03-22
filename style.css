@@ -1,0 +1,166 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --accent: #2563eb;
+  --border: #dbe3f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.site-header {
+  background: #0f172a;
+  color: #fff;
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.site-header a {
+  color: #bfdbfe;
+  text-decoration: none;
+  border: 1px solid rgba(191, 219, 254, 0.4);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.blog-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: #fafcff;
+}
+
+.profile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+button,
+.import-button {
+  cursor: pointer;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.feedback {
+  min-height: 1.2rem;
+  color: #0f766e;
+  font-size: 0.95rem;
+}
+
+.note-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: #fcfdff;
+}
+
+.note-item small {
+  color: #475569;
+}
+
+.photo-wall {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.photo-wall img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+}
+
+footer a {
+  color: #1d4ed8;
+}
