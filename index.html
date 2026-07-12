@@ -1,56 +1,77 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Osako 的个人网站</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header" id="top">
-      <h1>Osako 的个人网站</h1>
-      <p>请选择你要访问的栏目。</p>
-      <nav>
-        <a href="index.html">主页</a>
-        <a href="blog.html">博客</a>
-        <a href="profile.html">个人资料库</a>
-        <a href="notes.html">分类笔记</a>
-        <a href="gallery.html">照片墙</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Osako 的个人科研主页，记录医学多模态模型可靠性研究、项目实践与学习笔记。">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Osako — 医学多模态与可靠性探索者">
+  <meta property="og:description" content="记录研究问题、项目实践与学习过程。">
+  <meta property="og:url" content="https://osak0.github.io/">
+  <link rel="canonical" href="https://osak0.github.io/">
+  <link rel="stylesheet" href="style.css">
+  <script src="content.js" defer></script>
+  <script src="script.js" defer></script>
+  <title>Osako — 医学多模态与可靠性探索者</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Osako 首页"><span class="brand-mark">O.</span> Osako</a>
+      <nav class="site-nav" aria-label="主要导航">
+        <a href="index.html" aria-current="page">首页</a><a href="research.html">研究</a><a href="projects.html">项目</a><a href="notes.html">笔记</a><a href="about.html">关于</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main class="container">
-      <section class="card">
-        <h2>栏目导航</h2>
-        <div class="grid">
-          <article class="blog-item">
-            <h3>博客展示</h3>
-            <p>查看我的博客内容与最近更新。</p>
-            <a href="blog.html">进入博客</a>
-          </article>
-          <article class="blog-item">
-            <h3>个人资料库</h3>
-            <p>查看我的基础资料和兴趣方向。</p>
-            <a href="profile.html">进入资料库</a>
-          </article>
-          <article class="blog-item">
-            <h3>分类笔记</h3>
-            <p>按分类记录与保存你的笔记内容。</p>
-            <a href="notes.html">进入笔记</a>
-          </article>
-          <article class="blog-item">
-            <h3>照片墙</h3>
-            <p>上传并浏览个人照片墙。</p>
-            <a href="gallery.html">进入照片墙</a>
-          </article>
+  <main id="main" class="page-shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Learning · Research · Building</p>
+        <h1 id="hero-title">在医学 AI 中，追问模型究竟看见了什么。</h1>
+        <p class="hero-copy">你好，我是 Osako，一名计算机专业本科生。我正在学习多模态大模型与医学图像分析，关注医学 MLLM 的可靠性、幻觉现象与视觉证据一致性。</p>
+        <div class="hero-actions">
+          <a class="button" href="research.html">了解研究方向</a>
+          <a class="button secondary" href="notes.html">查看学习笔记</a>
         </div>
-      </section>
-    </main>
+      </div>
+      <aside class="focus-note" aria-label="当前关注">
+        <p class="eyebrow">Current focus</p>
+        <h2>多粒度幻觉与视觉证据依赖</h2>
+        <p>先通过扎实实验寻找稳定现象，建立评价方法，再逐步解释模型产生错误的原因。</p>
+      </aside>
+    </section>
 
-    <footer>
-      <a href="#top">回到顶部</a>
-    </footer>
+    <section class="section" aria-labelledby="directions-title">
+      <div class="section-heading">
+        <p class="eyebrow">Research interests</p>
+        <h2 id="directions-title">我持续回到的几个问题</h2>
+        <p>当前阶段更关注问题定义、实验可信度和可复现流程，而不是过早堆叠复杂方法。</p>
+      </div>
+      <div class="editorial-grid">
+        <article class="feature-card"><span class="card-index">01</span><h3>医学 MLLM 可靠性</h3><p>模型回答是否真正依赖图像中的临床证据，以及错误在什么条件下稳定出现。</p></article>
+        <article class="feature-card"><span class="card-index">02</span><h3>多粒度幻觉</h3><p>从整体报告、医学实体到局部视觉区域，理解不同层级幻觉之间的联系。</p></article>
+        <article class="feature-card"><span class="card-index">03</span><h3>可复现科研工程</h3><p>将数据、推理、评测与分析组织成透明、可追踪并能够复用的实验流程。</p></article>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
-  </body>
+    <section class="section" aria-labelledby="explore-title">
+      <div class="section-heading"><p class="eyebrow">Explore</p><h2 id="explore-title">从这里继续</h2></div>
+      <div class="editorial-grid">
+        <a class="feature-card" href="research.html"><span class="card-index">研究</span><h3>正在思考的问题</h3><p>研究兴趣、当前探索与长期方向。</p><span class="card-link">查看研究 →</span></a>
+        <a class="feature-card" href="projects.html"><span class="card-index">项目</span><h3>把想法做成实验</h3><p>持续整理项目目标、过程、代码与复盘。</p><span class="card-link">查看项目 →</span></a>
+        <a class="feature-card" href="notes.html"><span class="card-index">笔记</span><h3>记录理解的过程</h3><p>学习笔记、论文阅读与实验复盘。</p><span class="card-link">查看笔记 →</span></a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="updates-title">
+      <div class="section-heading"><p class="eyebrow">Latest updates</p><h2 id="updates-title">近期动态</h2></div>
+      <div class="empty-state" data-content="updates"><h2>这里还没有公开动态</h2><p>有值得沉淀的研究进展、项目记录或新笔记后，它们会出现在这里。</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-shell"><p>© <span data-current-year>2026</span> Osako. 保持好奇，持续构建。</p><a href="https://github.com/Osak0" rel="me">GitHub ↗</a></div></footer>
+</body>
 </html>
