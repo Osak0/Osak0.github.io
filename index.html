@@ -3,75 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Osako 的个人科研主页，记录医学多模态模型可靠性研究、项目实践与学习笔记。">
-  <meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="Osako 的个人主页，专注医学 AI 研究与工程实践。">
+  <meta name="theme-color" content="#f3f1ea">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Osako — 医学多模态与可靠性探索者">
-  <meta property="og:description" content="记录研究问题、项目实践与学习过程。">
+  <meta property="og:title" content="Osako — Personal Homepage">
+  <meta property="og:description" content="医学 AI 研究与工程实践记录。">
   <meta property="og:url" content="https://osak0.github.io/">
   <link rel="canonical" href="https://osak0.github.io/">
   <link rel="stylesheet" href="style.css">
-  <script src="content.js" defer></script>
   <script src="script.js" defer></script>
-  <title>Osako — 医学多模态与可靠性探索者</title>
+  <title>Osako — Personal Homepage</title>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
+
   <header class="site-header">
-    <div class="nav-shell">
-      <a class="brand" href="index.html" aria-label="Osako 首页"><span class="brand-mark">O.</span> Osako</a>
-      <nav class="site-nav" aria-label="主要导航">
-        <a href="index.html" aria-current="page">首页</a><a href="research.html">研究</a><a href="projects.html">项目</a><a href="notes.html">笔记</a><a href="about.html">关于</a>
+    <div class="container nav-shell">
+      <a class="brand" href="#top"><span class="brand-mark">O.</span> Osako</a>
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="page-shell">
-    <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <p class="eyebrow">Learning · Research · Building</p>
-        <h1 id="hero-title">在医学 AI 中，追问模型究竟看见了什么。</h1>
-        <p class="hero-copy">你好，我是 Osako，一名计算机专业本科生。我正在学习多模态大模型与医学图像分析，关注医学 MLLM 的可靠性、幻觉现象与视觉证据一致性。</p>
-        <div class="hero-actions">
-          <a class="button" href="research.html">了解研究方向</a>
-          <a class="button secondary" href="notes.html">查看学习笔记</a>
-        </div>
-      </div>
-      <aside class="focus-note" aria-label="当前关注">
-        <p class="eyebrow">Current focus</p>
-        <h2>多粒度幻觉与视觉证据依赖</h2>
-        <p>先通过扎实实验寻找稳定现象，建立评价方法，再逐步解释模型产生错误的原因。</p>
-      </aside>
+  <main id="main" class="container">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Personal Homepage</p>
+      <h1 id="hero-title">Building reliable medical AI with careful experiments.</h1>
+      <p class="hero-copy">你好，我是 Osako。这里是我对医学多模态模型、可靠性评估与科研工程化的长期记录。页面保持简洁，只呈现核心信息。</p>
     </section>
 
-    <section class="section" aria-labelledby="directions-title">
-      <div class="section-heading">
-        <p class="eyebrow">Research interests</p>
-        <h2 id="directions-title">我持续回到的几个问题</h2>
-        <p>当前阶段更关注问题定义、实验可信度和可复现流程，而不是过早堆叠复杂方法。</p>
-      </div>
-      <div class="editorial-grid">
-        <article class="feature-card"><span class="card-index">01</span><h3>医学 MLLM 可靠性</h3><p>模型回答是否真正依赖图像中的临床证据，以及错误在什么条件下稳定出现。</p></article>
-        <article class="feature-card"><span class="card-index">02</span><h3>多粒度幻觉</h3><p>从整体报告、医学实体到局部视觉区域，理解不同层级幻觉之间的联系。</p></article>
-        <article class="feature-card"><span class="card-index">03</span><h3>可复现科研工程</h3><p>将数据、推理、评测与分析组织成透明、可追踪并能够复用的实验流程。</p></article>
-      </div>
+    <section id="about" class="section" aria-labelledby="about-title">
+      <p class="eyebrow">About</p>
+      <h2 id="about-title">我目前在做什么</h2>
+      <p>我是一名计算机专业本科生，重点关注医学影像与多模态大模型中的可靠性问题。我希望通过可复现的实验流程，把“模型为什么错”和“如何更可信”这两个问题讲清楚。</p>
     </section>
 
-    <section class="section" aria-labelledby="explore-title">
-      <div class="section-heading"><p class="eyebrow">Explore</p><h2 id="explore-title">从这里继续</h2></div>
-      <div class="editorial-grid">
-        <a class="feature-card" href="research.html"><span class="card-index">研究</span><h3>正在思考的问题</h3><p>研究兴趣、当前探索与长期方向。</p><span class="card-link">查看研究 →</span></a>
-        <a class="feature-card" href="projects.html"><span class="card-index">项目</span><h3>把想法做成实验</h3><p>持续整理项目目标、过程、代码与复盘。</p><span class="card-link">查看项目 →</span></a>
-        <a class="feature-card" href="notes.html"><span class="card-index">笔记</span><h3>记录理解的过程</h3><p>学习笔记、论文阅读与实验复盘。</p><span class="card-link">查看笔记 →</span></a>
-      </div>
+    <section id="focus" class="section" aria-labelledby="focus-title">
+      <p class="eyebrow">Focus</p>
+      <h2 id="focus-title">当前关注方向</h2>
+      <ul class="focus-list">
+        <li>医学 MLLM 在真实视觉证据上的依赖强度</li>
+        <li>多粒度幻觉现象（报告级、实体级、区域级）的关联分析</li>
+        <li>面向研究复现的数据、推理与评测流程规范化</li>
+      </ul>
     </section>
 
-    <section class="section" aria-labelledby="updates-title">
-      <div class="section-heading"><p class="eyebrow">Latest updates</p><h2 id="updates-title">近期动态</h2></div>
-      <div class="empty-state" data-content="updates"><h2>这里还没有公开动态</h2><p>有值得沉淀的研究进展、项目记录或新笔记后，它们会出现在这里。</p></div>
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title">联系与更新</h2>
+      <p>如果你也在做医学 AI 可靠性相关工作，欢迎交流。</p>
+      <p><a class="link" href="https://github.com/Osak0" rel="me">GitHub @Osak0 ↗</a></p>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="footer-shell"><p>© <span data-current-year>2026</span> Osako. 保持好奇，持续构建。</p><a href="https://github.com/Osak0" rel="me">GitHub ↗</a></div></footer>
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <p>© <span data-current-year>2026</span> Osako.</p>
+    </div>
+  </footer>
 </body>
 </html>
