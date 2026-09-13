@@ -17,46 +17,36 @@
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
 
-  <header class="site-header">
-    <div class="container nav-shell">
-      <a class="brand" href="#top"><span class="brand-mark">O.</span> Osako</a>
-      <nav class="site-nav" aria-label="页面导航">
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
   <main id="main" class="container">
-    <section id="top" class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">Personal Homepage</p>
-      <h1 id="hero-title">Building reliable medical AI with careful experiments.</h1>
-      <p class="hero-copy">你好，我是 Osako。这里是我对医学多模态模型、可靠性评估与科研工程化的长期记录。页面保持简洁，只呈现核心信息。</p>
-    </section>
+    <div class="profile-layout">
+      <aside class="profile-sidebar" aria-label="个人资料">
+        <img
+          class="avatar"
+          src="assets/avatar-placeholder.svg"
+          alt="Profile avatar"
+          width="220"
+          height="220"
+        >
+        <p class="sidebar-note">请将 <code>assets/avatar-placeholder.svg</code> 替换为你在聊天中提供的头像图片文件。</p>
+        <p><a class="link" href="https://github.com/Osak0" rel="me noopener noreferrer">GitHub @Osak0 ↗</a></p>
+      </aside>
 
-    <section id="about" class="section" aria-labelledby="about-title">
-      <p class="eyebrow">About</p>
-      <h2 id="about-title">我目前在做什么</h2>
-      <p>我是一名计算机专业本科生，重点关注医学影像与多模态大模型中的可靠性问题。我希望通过可复现的实验流程，把“模型为什么错”和“如何更可信”这两个问题讲清楚。</p>
-    </section>
+      <section class="profile-content" aria-label="主页主要内容">
+        <section id="introduction" class="section" aria-labelledby="introduction-title">
+          <p class="eyebrow">Introduction</p>
+          <h1 id="introduction-title">Introduction</h1>
+          <!-- 在这里填写 Introduction 内容：index.html -> section#introduction -->
+          <p class="placeholder-text">[在此填写你的 Introduction 内容 / Write your Introduction content here]</p>
+        </section>
 
-    <section id="focus" class="section" aria-labelledby="focus-title">
-      <p class="eyebrow">Focus</p>
-      <h2 id="focus-title">当前关注方向</h2>
-      <ul class="focus-list">
-        <li>医学 MLLM 在真实视觉证据上的依赖强度</li>
-        <li>多粒度幻觉现象（报告级、实体级、区域级）的关联分析</li>
-        <li>面向研究复现的数据、推理与评测流程规范化</li>
-      </ul>
-    </section>
-
-    <section id="contact" class="section" aria-labelledby="contact-title">
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact-title">联系与更新</h2>
-      <p>如果你也在做医学 AI 可靠性相关工作，欢迎交流。</p>
-      <p><a class="link" href="https://github.com/Osak0" rel="me">GitHub @Osak0 ↗</a></p>
-    </section>
+        <section id="education" class="section" aria-labelledby="education-title">
+          <p class="eyebrow">Education</p>
+          <h2 id="education-title">Education</h2>
+          <!-- 在这里填写 Education 内容：index.html -> section#education -->
+          <p class="placeholder-text">[在此填写你的 Education 内容 / Write your Education content here]</p>
+        </section>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
