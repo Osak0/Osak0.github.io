@@ -1,0 +1,13 @@
+---
+import Shell from "../layouts/Shell.astro";
+import { documents } from "../lib/documents";
+export function getStaticPaths() {
+  return documents.map((doc) => ({
+    params: { path: doc.url === "/" ? undefined : doc.url.slice(1, -1) },
+    props: { doc },
+  }));
+}
+const { doc } = Astro.props;
+---
+
+<Shell doc={doc} />
