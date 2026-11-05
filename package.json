@@ -1,0 +1,32 @@
+{
+  "name": "osako-personal-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node tests/build.mjs",
+    "test:build": "node tests/build.mjs",
+    "format": "prettier --write src astro.config.mjs tests"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "astro": "7.3.3",
+    "gray-matter": "4.0.3",
+    "markdown-it": "15.0.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/markdown-it": "14.2.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.2",
+    "typescript": "6.0.3"
+  }
+}

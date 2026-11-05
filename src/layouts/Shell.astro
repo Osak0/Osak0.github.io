@@ -1,0 +1,239 @@
+---
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "../styles/global.css";
+import {
+  documents,
+  assets,
+  renderDocument,
+  type Document,
+} from "../lib/documents";
+interface Props {
+  doc: Document;
+  missing?: boolean;
+}
+const { doc, missing = false } = Astro.props;
+const folders = [
+  ...new Set(
+    documents
+      .filter((d) => d.file !== "SKILL.md")
+      .map((d) => d.file.split("/").slice(0, -1).join("/")),
+  ),
+];
+const metadata = Object.entries(doc.metadata).filter(
+  ([k, v]) => k !== "draft" && v !== "" && v !== undefined && v !== null,
+);
+---
+
+<!doctype html>
+<html lang={doc.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{doc.title} — osako</title>
+    <meta
+      name="description"
+      content={String(doc.metadata.description || "Osako 的公开文档")}
+    />
+    <link rel="canonical" href={new URL(doc.url, Astro.site)} />
+    {missing && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" />
+    <script is:inline>
+      try {
+        if (localStorage.getItem("theme") === "dark")
+          document.documentElement.dataset.theme = "dark";
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#document">
+      跳到正文
+    </a>
+    <div class="shell">
+      <header class="top">
+        <a class="brand" href="/">
+          osako <span aria-hidden="true">/</span>
+        </a>
+        <div class="theme-control" role="group" aria-label="外观">
+          <button data-theme-choice="light" aria-pressed="true">
+            浅色
+          </button>
+          <button data-theme-choice="dark" aria-pressed="false">
+            深色
+          </button>
+        </div>
+      </header>
+      <div class="workspace">
+        <aside>
+          <details class="directory" open>
+            <summary>文件目录</summary>
+            <nav aria-label="文件目录">
+              <a
+                class="file"
+                href="/"
+                aria-current={doc.file === "SKILL.md" ? "page" : undefined}
+              >
+                SKILL.md
+              </a>
+              <details open>
+                <summary>references/</summary>
+                {folders
+                  .filter((f) => f.startsWith("references/"))
+                  .map((f) => (
+                    <details class="nested" open={doc.file.startsWith(f + "/")}>
+                      <summary>{f.slice(11)}/</summary>
+                      {documents
+                        .filter((d) => d.file.startsWith(f + "/"))
+                        .map((d) => (
+                          <a
+                            class="file leaf"
+                            href={d.url}
+                            aria-current={
+                              doc.file === d.file ? "page" : undefined
+                            }
+                          >
+                            {d.file.split("/").pop()}
+                          </a>
+                        ))}
+                    </details>
+                  ))}
+              </details>
+              {assets.length > 0 && (
+                <details>
+                  <summary>assets/</summary>
+                  {assets.map((a) => (
+                    <a class="file leaf" href={"/" + a.file}>
+                      {a.file.slice(7)}
+                    </a>
+                  ))}
+                </details>
+              )}
+            </nav>
+          </details>
+        </aside>
+        <main id="document" tabindex="-1">
+          <div class="toolbar">
+            <span class="path">{doc.file}</span>
+            {!missing && (
+              <div class="modes" aria-label="文档视图">
+                <a href={doc.url} data-view="read" aria-current="page">
+                  阅读
+                </a>
+                <a href={doc.url + "?view=source"} data-view="source">
+                  源码
+                </a>
+              </div>
+            )}
+          </div>
+          <div id="reading">
+            {metadata.length > 0 && (
+              <dl class="metadata">
+                {metadata.map(([k, v]) => (
+                  <div>
+                    <dt>{k}</dt>
+                    <dd>
+                      {typeof v === "object" ? JSON.stringify(v) : String(v)}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <article
+              class="prose"
+              set:html={
+                renderDocument(doc) ||
+                '<h1>SKILL.md</h1><p class="empty">此文档暂无内容</p>'
+              }
+            />
+          </div>
+          {!missing && (
+            <section id="source" hidden aria-label="Markdown 源码">
+              <div class="source-actions">
+                <button id="copy">复制</button>
+                <a
+                  href={"/raw/" + doc.file}
+                  download={doc.file.split("/").pop()}
+                >
+                  下载
+                </a>
+                <span id="copy-status" role="status"></span>
+              </div>
+              <pre><code id="raw-text">{doc.raw}</code></pre>
+            </section>
+          )}
+          {!missing && (
+            <noscript>
+              <a href={"/raw/" + doc.file}>查看原始 Markdown</a>
+            </noscript>
+          )}
+        </main>
+      </div>
+    </div>
+    <script>
+      const themeButtons = document.querySelectorAll<HTMLButtonElement>(
+        "[data-theme-choice]",
+      );
+      function syncTheme() {
+        const current = document.documentElement.dataset.theme || "light";
+        themeButtons.forEach((button) =>
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.themeChoice === current),
+          ),
+        );
+      }
+      syncTheme();
+      themeButtons.forEach((button) =>
+        button.addEventListener("click", () => {
+          const next = button.dataset.themeChoice!;
+          document.documentElement.dataset.theme = next;
+          try {
+            localStorage.setItem("theme", next);
+          } catch {}
+          syncTheme();
+        }),
+      );
+      if (new URLSearchParams(location.search).get("view") === "source") {
+        const panel = document.querySelector<HTMLElement>("#source");
+        if (panel) {
+          panel.hidden = false;
+          document.querySelector<HTMLElement>("#reading")!.hidden = true;
+          document
+            .querySelector('[data-view="read"]')
+            ?.removeAttribute("aria-current");
+          document
+            .querySelector('[data-view="source"]')
+            ?.setAttribute("aria-current", "page");
+        }
+      }
+      const directory =
+        document.querySelector<HTMLDetailsElement>(".directory")!;
+      if (matchMedia("(max-width:700px)").matches) directory.open = false;
+      for (const folder of document.querySelectorAll<HTMLDetailsElement>(
+        "nav details",
+      )) {
+        const key = "folder:" + folder.querySelector("summary")?.textContent;
+        try {
+          const saved = sessionStorage.getItem(key);
+          if (saved && !folder.querySelector('[aria-current="page"]'))
+            folder.open = saved === "open";
+        } catch {}
+        folder.addEventListener("toggle", () => {
+          try {
+            sessionStorage.setItem(key, folder.open ? "open" : "closed");
+          } catch {}
+        });
+      }
+      document.querySelector("#copy")?.addEventListener("click", async () => {
+        const status = document.querySelector("#copy-status")!;
+        try {
+          await navigator.clipboard.writeText(
+            document.querySelector("#raw-text")!.textContent || "",
+          );
+          status.textContent = "已复制";
+        } catch {
+          status.textContent = "复制失败，请手动选择源码复制";
+        }
+      });
+    </script>
+  </body>
+</html>

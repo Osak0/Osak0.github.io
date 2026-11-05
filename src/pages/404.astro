@@ -1,0 +1,14 @@
+---
+import Shell from "../layouts/Shell.astro";
+const doc = {
+  file: "404",
+  url: "/404/",
+  raw: "",
+  body: "# 页面不存在\n\n[返回 SKILL.md](/)",
+  title: "页面不存在",
+  lang: "zh-CN",
+  metadata: {},
+};
+---
+
+<Shell doc={doc} missing />
