@@ -1,5 +1,7 @@
 # Introduction
 
+![Osako's pixel-art avatar](./assets/avatar.png)
+
 Hello, I'm worry, also known as Osak0. Now, I'm studying Computer Science in XJTU. Interested in AI, such as Agent and Medical Imaging.
 
 # Email

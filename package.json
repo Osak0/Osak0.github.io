@@ -8,7 +8,7 @@
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node tests/build.mjs",
+    "test": "node tests/code.mjs && node tests/build.mjs",
     "test:build": "node tests/build.mjs",
     "format": "prettier --write src astro.config.mjs tests"
   },
@@ -17,8 +17,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
+    "@expressive-code/plugin-line-numbers": "0.44.3",
     "@fontsource/ibm-plex-mono": "5.3.0",
     "astro": "7.3.3",
+    "expressive-code": "0.44.3",
     "gray-matter": "4.0.3",
     "markdown-it": "15.0.3"
   },
