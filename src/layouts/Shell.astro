@@ -12,6 +12,15 @@ interface Props {
   missing?: boolean;
 }
 const { doc, missing = false } = Astro.props;
+// Keep the homepage introduction together while retaining Markdown as the source.
+const introductionEnd = doc.file === "SKILL.md" ? doc.body.search(/\n# /) : -1;
+const introduction =
+  introductionEnd > -1
+    ? await renderDocument({ ...doc, body: doc.body.slice(0, introductionEnd) })
+    : undefined;
+const body = introduction
+  ? await renderDocument({ ...doc, body: doc.body.slice(introductionEnd) })
+  : await renderDocument(doc);
 const folders = [
   ...new Set(
     documents
@@ -137,13 +146,20 @@ const metadata = Object.entries(doc.metadata).filter(
                 ))}
               </dl>
             )}
-            <article
-              class="prose"
-              set:html={
-                renderDocument(doc) ||
-                '<h1>SKILL.md</h1><p class="empty">此文档暂无内容</p>'
-              }
-            />
+            <article class="prose">
+              {introduction && (
+                <section
+                  class="introduction"
+                  aria-label="Introduction"
+                  set:html={introduction}
+                />
+              )}
+              <Fragment
+                set:html={
+                  body || '<h1>SKILL.md</h1><p class="empty">此文档暂无内容</p>'
+                }
+              />
+            </article>
           </div>
           {!missing && (
             <section id="source" hidden aria-label="Markdown 源码">
@@ -169,6 +185,31 @@ const metadata = Object.entries(doc.metadata).filter(
       </div>
     </div>
     <script>
+      document.addEventListener(
+        "click",
+        async (event) => {
+          const button = (event.target as Element).closest<HTMLButtonElement>(
+            ".expressive-code button[data-code]",
+          );
+          if (!button) return;
+          event.stopImmediatePropagation();
+          const status = document.createElement("span");
+          status.setAttribute("role", "status");
+          status.className = "code-copy-status";
+          button.parentElement?.querySelector(".code-copy-status")?.remove();
+          button.parentElement?.append(status);
+          try {
+            await navigator.clipboard.writeText(
+              (button.dataset.code || "").replace(/\\u007f/g, "\n"),
+            );
+            status.textContent = "已复制";
+          } catch {
+            status.textContent = "复制失败，请手动选择代码复制";
+          }
+          setTimeout(() => status.remove(), 4000);
+        },
+        true,
+      );
       const themeButtons = document.querySelectorAll<HTMLButtonElement>(
         "[data-theme-choice]",
       );

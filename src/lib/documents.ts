@@ -1,3 +1,4 @@
+import { renderCode } from "./code";
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -31,7 +32,9 @@ export const assets = walk(path.join(base, "assets")).map((p) => ({
 const entries: Document[] = walk(base)
   .filter(
     (p) =>
-      p.endsWith(".md") && !p.startsWith(path.join(base, "assets") + path.sep),
+      p.endsWith(".md") &&
+      !p.startsWith(path.join(base, "references/code") + path.sep) &&
+      !p.startsWith(path.join(base, "assets") + path.sep),
   )
   .flatMap((p) => {
     const file = path.relative(base, p).replaceAll("\\", "/");
@@ -95,7 +98,7 @@ export const documents: Document[] = [
     metadata: {},
   },
 ];
-export function renderDocument(doc: Document) {
+export async function renderDocument(doc: Document) {
   const md = new MarkdownIt({ html: false, linkify: true });
   function resolve(href: string) {
     if (/^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(href)) return href;
@@ -120,6 +123,6 @@ export function renderDocument(doc: Document) {
     tokens[i].attrSet("src", resolve(String(tokens[i].attrGet("src") || "")));
     return image(tokens, i, options, _env, self);
   };
-  return md.render(doc.body);
+  return renderCode(md, doc.body, doc.file);
 }
-for (const doc of documents) renderDocument(doc);
+for (const doc of documents) await renderDocument(doc);
